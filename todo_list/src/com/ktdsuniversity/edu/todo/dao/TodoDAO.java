@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import com.ktdsuniversity.edu.todo.vo.TodoVO;
 
 public class TodoDAO {
-	//edit
+
 	//공유메모리 static에서 개수 count
 	private static int count = 1;
 	
