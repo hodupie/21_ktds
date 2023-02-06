@@ -1,6 +1,6 @@
 package assignment;
 
-public class Q20 {
+public class Q20_Product {
 	
 	private String name;
 	
@@ -8,6 +8,11 @@ public class Q20 {
 	
 	private int stock;
 
+	public Q20_Product (String name, int price, int stock) {
+		setName(name);
+		setPrice(price);
+		setStock(stock);
+	}
 	public String getName() {
 		return name;
 	}
@@ -32,15 +37,6 @@ public class Q20 {
 		this.stock = stock;
 	}
 	
-	public void sell (int order) {
-		stock -= order;
-		money += price;
-	}
-	
-	public void refund (int refund) {
-		stock += order;
-		money -= price;
-	}
 	
 
 }
