@@ -11,7 +11,7 @@ public class TodoController {
 	public static void main(String[] args) {
 		
 		TodoService service = new TodoService();
-		//test
+		
 		/**
 		 * 1. 등록
 		 * 2. 조회 (1건)
