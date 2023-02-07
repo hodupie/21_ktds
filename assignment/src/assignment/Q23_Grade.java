@@ -1,5 +1,5 @@
 package assignment;
 
-public class Q23 {
+public class Q23_Grade {
 
 }
