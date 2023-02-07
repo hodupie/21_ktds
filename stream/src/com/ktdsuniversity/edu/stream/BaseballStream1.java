@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class BaseballStream1 {
 
 	public static List<AllStarFullVO> readAllStarFull() {
-
+//0
 		try {
 			List<AllStarFullVO> list = Files.readAllLines(Paths.get("C:\\Devs\\data\\baseball\\core\\AllstarFull.csv"))
 					.stream().skip(1) // 첫번째 라인 건너뛰기
