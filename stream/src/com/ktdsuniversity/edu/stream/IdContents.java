@@ -197,6 +197,7 @@ public class IdContents {
 		System.out.println("================16===========================");
 		//16. (병렬) 10K.ID.CONTENTS 파일에서 내용이 있으면 글 번호가 7로 시작하는 모든 글들의 첫번째 단어만 출력
 		list.parallelStream()
+			.filter(vo -> vo.getValue() != null)
 			.filter(vo -> vo.getKey().startsWith("7"))
 			.map(vo -> {
 					if (vo.getValue() != null && vo.getValue().trim().length() > 0) {
