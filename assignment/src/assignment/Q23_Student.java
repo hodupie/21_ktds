@@ -1,14 +1,15 @@
 package assignment;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Q23_Student {
 	private String name;
-	private static List<String> gradeList;
+	private static Map<String, Integer> gradeList;
 	
 	public Q23_Student () {
-		gradeList = new ArrayList<>();
+		gradeList = new HashMap<>();
 	}
 
 	public String getName() {
