@@ -28,13 +28,13 @@ public class Store {
 	 */
 	public void addProducts() {
 		drink.name = "콜라";
-		drink.quntity = 10;
+		drink.quantity = 10;
 		
 		snack.name = "홈런볼";
-		snack.quntity = 0;
+		snack.quantity = 0;
 		
 		water.name = "삼다수";
-		water.quntity = 1;
+		water.quantity = 1;
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class Store {
 		// 물건 명
 		String productName = water.name;
 		// 재고
-		int productQuantity = water.quntity;
+		int productQuantity = water.quantity;
 
 		boolean outOfStock = productQuantity == 0;
 		boolean needOrder = productQuantity == 1;
@@ -68,7 +68,7 @@ public class Store {
 		// 물건 명
 		productName = snack.name;
 		// 재고
-		productQuantity = snack.quntity;
+		productQuantity = snack.quantity;
 
 		outOfStock = productQuantity == 0;
 		needOrder = productQuantity == 1;
@@ -93,7 +93,7 @@ public class Store {
 		// 물건 명
 		productName = drink.name;
 		// 재고
-		productQuantity = drink.quntity;
+		productQuantity = drink.quantity;
 
 		outOfStock = productQuantity == 0;
 		needOrder = productQuantity == 1;

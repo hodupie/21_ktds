@@ -1,4 +1,4 @@
-package assignment;
+package loop;
 
 import java.util.ArrayList;
 import java.util.List;

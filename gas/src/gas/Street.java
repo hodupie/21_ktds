@@ -1,34 +1,30 @@
 package gas;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Street {
 	
-	/**
-	 * 가솔린 리터당 가격
-	 */
-	public static final double GASOLIN_PRICE = 1569.67;
-	/**
-	 * 경유 리터당 가격
-	 */
-	public static final double DIESEL_PRICE = 1651.15;
-	/**
-	 * LPG 리터당 가격
-	 */
-	public static final double LPG_PRICE = 1039.35;
-	
 	public static void main(String[] args) {
+		GasStation gasStation  = new GasStation();
 		
-		GasStation gasStation = new GasStation();
+		List<Customer> customers =  new ArrayList<>();
 		
-		Customer customer = new Customer();
-		customer.setFuel(new Fuel("diesel", 50));
-		customer.setMoney(1_000_000);
+		customers.add(new Customer(new Fuel(FuelType.GASOLINE, 20), 1_000_000));
+		customers.add(new Customer(new Fuel(FuelType.DIESEL,50),1_000_000));
+		customers.add(new Customer(new Fuel(FuelType.LPG),1_000_000));
+
 		
-		customer.buy(gasStation, "diesel", 50);
+		for(Customer customer: customers) {
+			FuelType type = customer.getFuel().getType();
+			customer.buy(gasStation, type, 20);
+		}
+		
+		for(Customer customer: customers) {
+			System.out.println(customer);
+		}
 		
 		System.out.println(gasStation);
-		System.out.println(customer);
-		
 	}
 	
-
 }

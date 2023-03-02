@@ -1,4 +1,4 @@
-package assignment;
+package loop;
 
 import java.util.Random;
 import java.util.Scanner;

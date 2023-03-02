@@ -6,30 +6,20 @@ package gas;
  */
 public class Fuel {
 	
-	/**
-	 * 연료 종류
-	 * 휘발류, 경유, LPG
-	 */
-	private String type;
-	 
-	/**
+	private FuelType type;
+	/*
 	 * 연료 잔량
 	 */
 	private int stock;
 	
-	public Fuel(String type, int stock) {
-		setType(type);
-		setStock(stock);
-	}
-
-	public String getType() {
+	public FuelType getType() {
 		return type;
 	}
-
-	public void setType(String type) {
+	
+	public void setType(FuelType type) {
 		this.type = type;
 	}
-
+	
 	public int getStock() {
 		return stock;
 	}
@@ -38,9 +28,32 @@ public class Fuel {
 		this.stock = stock;
 	}
 
+	public void add(int amount) {
+		stock += stock;
+	}
+	
+	public void substrack(int amount) {
+		stock -= stock;
+	}
+	
+	Fuel() {
+		
+	}
+	
+	Fuel(FuelType type){
+		this.type = type;
+	}
+	
+	
+	Fuel(FuelType type, int stock) {
+		this.type = type;
+		this.stock = stock;
+	}
+	
+	
 	@Override
 	public String toString() {
-		return type + ": " + stock + ",";
+		return type + ": " + stock;
 	}
 
 

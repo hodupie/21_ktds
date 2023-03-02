@@ -67,72 +67,72 @@ public class BaseballStream1 {
 		
 		//연도에 관계 없이 playerID가 F로 시작하는 모든 데이터 출력
 		
-//		list.stream()
-////				.filter( (vo2) -> vo2.getPlayerID().startsWith("f") || vo2.getPlayerID().startsWith("F"))
-//				.filter( (vo2) -> vo2.getPlayerID().toUpperCase().startsWith("F"))
-//				.forEach( (vo2) -> {
-//					System.out.println(vo2.getPlayerID());
-//					System.out.println(vo2.getYear());
-//				});
-//		
-//		list.stream()
-//				.filter( (allStarVO) -> allStarVO.getYear().equals("2004"))
-//				.filter( (allStarVO) -> allStarVO.getTeamID().equals("TEX"))
-//				.forEach( (allStarVO) -> {
-//					System.out.println(allStarVO.getPlayerID());
-//					System.out.println(allStarVO.getYear());
-//					System.out.println(allStarVO.getTeamID());
-//				});
-//	
-//		list.stream()
-//			.filter( (allStarVO) -> allStarVO.getStartingPos() == 0)
-//			.forEach( (allStarVO) -> {
-//				System.out.println(allStarVO.getPlayerID());
-//				System.out.println(allStarVO.getStartingPos());
-//			});
+		list.stream()
+//				.filter( (vo2) -> vo2.getPlayerID().startsWith("f") || vo2.getPlayerID().startsWith("F"))
+				.filter( (vo2) -> vo2.getPlayerID().toUpperCase().startsWith("F"))
+				.forEach( (vo2) -> {
+					System.out.println(vo2.getPlayerID());
+					System.out.println(vo2.getYear());
+				});
+		
+		list.stream()
+				.filter( (allStarVO) -> allStarVO.getYear().equals("2004"))
+				.filter( (allStarVO) -> allStarVO.getTeamID().equals("TEX"))
+				.forEach( (allStarVO) -> {
+					System.out.println(allStarVO.getPlayerID());
+					System.out.println(allStarVO.getYear());
+					System.out.println(allStarVO.getTeamID());
+				});
+	
+		list.stream()
+			.filter( (allStarVO) -> allStarVO.getStartingPos() == 0)
+			.forEach( (allStarVO) -> {
+				System.out.println(allStarVO.getPlayerID());
+				System.out.println(allStarVO.getStartingPos());
+			});
 		
 		
 		System.out.println("=================");
-		//gp == 0, teamID == NYA, PlayerID include "fo" 
-//		list.stream()
-//			.filter( (allStarVO) -> allStarVO.getTeamID().equals("NYA"))
-//			.filter( (allStarVO) -> allStarVO.getGp() == 0)
-//			.filter( (allStarVO) -> allStarVO.getPlayerID().toLowerCase().contains("fo"))
-//			.forEach( (allStarVO) -> {
-//				System.out.println(allStarVO.getPlayerID());
-//				System.out.println(allStarVO.getTeamID());
-//				System.out.println(allStarVO.getGp());
-//				System.out.println(allStarVO.getYear());
-//			});
+//		gp == 0, teamID == NYA, PlayerID include "fo" 
+		list.stream()
+			.filter( (allStarVO) -> allStarVO.getTeamID().equals("NYA"))
+			.filter( (allStarVO) -> allStarVO.getGp() == 0)
+			.filter( (allStarVO) -> allStarVO.getPlayerID().toLowerCase().contains("fo"))
+			.forEach( (allStarVO) -> {
+				System.out.println(allStarVO.getPlayerID());
+				System.out.println(allStarVO.getTeamID());
+				System.out.println(allStarVO.getGp());
+				System.out.println(allStarVO.getYear());
+			});
 		
 		System.out.println("=================");
-//		list.parallelStream()
-//			.filter( (allStarVO) -> allStarVO.getTeamID().equals("NYA"))
-//			.filter( (allStarVO) -> allStarVO.getGp() == 0)
-//			.filter( (allStarVO) -> allStarVO.getPlayerID().toUpperCase().contains("FO"))
-//			.forEach( (allStarVO) -> {
-//				System.out.println(allStarVO.getPlayerID());
-//				System.out.println(allStarVO.getTeamID());
-//				System.out.println(allStarVO.getGp());
-//				System.out.println(allStarVO.getYear());
-//			});
+		list.parallelStream()
+			.filter( (allStarVO) -> allStarVO.getTeamID().equals("NYA"))
+			.filter( (allStarVO) -> allStarVO.getGp() == 0)
+			.filter( (allStarVO) -> allStarVO.getPlayerID().toUpperCase().contains("FO"))
+			.forEach( (allStarVO) -> {
+				System.out.println(allStarVO.getPlayerID());
+				System.out.println(allStarVO.getTeamID());
+				System.out.println(allStarVO.getGp());
+				System.out.println(allStarVO.getYear());
+			});
 		System.out.println("=================");
 		
-//		List<String> playerNameList = list.stream()
-//											.map( (allStarVO) -> allStarVO.getPlayerID() )		//Stream -> String(PlayerID의 타입)
-//											.distinct()											//중복제거
-//											.sorted()
-//											.collect(Collectors.toList());
-//		playerNameList.forEach(System.out::println);
-//		
-//		//startingPos == 4의 playerID 추출 -> 중복제거 -> 정렬 -> 출력 
-//		List<String> StartingPosList = list.stream()
-//											.filter( (allStarVO) -> allStarVO.getStartingPos() == 4)
-//											.map ( (allStarVO) -> allStarVO.getPlayerID())
-//											.distinct()
-//											.sorted()
-//											.collect(Collectors.toList());
-//		StartingPosList.forEach(System.out::println);
+		List<String> playerNameList = list.stream()
+											.map( (allStarVO) -> allStarVO.getPlayerID() )		//Stream -> String(PlayerID의 타입)
+											.distinct()											//중복제거
+											.sorted()
+											.collect(Collectors.toList());
+		playerNameList.forEach(System.out::println);
+		
+		//startingPos == 4의 playerID 추출 -> 중복제거 -> 정렬 -> 출력 
+		List<String> StartingPosList = list.stream()
+											.filter( (allStarVO) -> allStarVO.getStartingPos() == 4)
+											.map ( (allStarVO) -> allStarVO.getPlayerID())
+											.distinct()
+											.sorted()
+											.collect(Collectors.toList());
+		StartingPosList.forEach(System.out::println);
 		
 //		//1. gameNum이 0이 아닌 것을 추출해 출력
 		list.stream()

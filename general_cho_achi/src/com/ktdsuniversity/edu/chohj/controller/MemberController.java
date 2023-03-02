@@ -1,5 +1,7 @@
 package com.ktdsuniversity.edu.chohj.controller;
 
+import java.util.List;
+
 import com.ktdsuniversity.edu.chohj.service.MemberService;
 import com.ktdsuniversity.edu.chohj.service.MemberServiceImpl;
 import com.ktdsuniversity.edu.chohj.vo.MemberVO;
@@ -31,17 +33,21 @@ public class MemberController {
 		member.setReadNumber(3);
 		member.setPageNumber(0);
 		service.create(member);
-//		
-//		List<MemberVO> memberList = service.readAll();
-//		for (MemberVO eachMember: memberList) {
-//			System.out.println(eachMember.getId());
-//			System.out.println(eachMember.getPassword());
-//			System.out.println(eachMember.getReadNumber());
-//			System.out.println(eachMember.getPageNumber());
-//		}
+
+//		전체 회원 정보 조회
+		List<MemberVO> memberList = service.readAll();
+		for (MemberVO eachMember: memberList) {
+			System.out.println(eachMember.getId());
+			System.out.println(eachMember.getPassword());
+			System.out.println(eachMember.getReadNumber());
+			System.out.println(eachMember.getPageNumber());
+			System.out.println("");
+		}
 		
+		System.out.println("==========================");
+		
+//		회원 한 명의 정보 조회
 		MemberVO oneMember = service.read("id2");
-		
 		if(oneMember!=null) {
 			System.out.println(oneMember.getId());
 			System.out.println(oneMember.getPassword());

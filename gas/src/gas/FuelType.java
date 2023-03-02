@@ -1,7 +1,7 @@
 package gas;
 
 /**
- * 연료의 종료
+ * 연료의 종류
  * @author User
  *
  */
@@ -9,7 +9,7 @@ public enum FuelType {
 	/**
 	 * 휘발유
 	 */
-	GASOLIN,
+	GASOLINE,
 	/**
 	 * 경유
 	 */
@@ -18,4 +18,5 @@ public enum FuelType {
 	 * LPG
 	 */
 	LPG;
+	
 }

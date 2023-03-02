@@ -18,7 +18,7 @@ public class PostList {
 	private List<Post> postList = new ArrayList<>();
 
 	/**
-	 * 게시글 등록 순번은 boardList의 size로 생성 조회수는 0으로 초기화
+	 * 게시글 등록: 순번은 boardList의 size로 생성 조회수는 0으로 초기화
 	 * 
 	 * @param title  제목
 	 * @param writer 작성자
@@ -33,7 +33,7 @@ public class PostList {
 	}
 
 	/**
-	 * 게시글 수정 제목만 수정할 수 있다.
+	 * 게시글 수정: 제목만 수정할 수 있다.
 	 * 
 	 * @param index 게시글의 인덱스
 	 * @param title 제목
@@ -44,7 +44,7 @@ public class PostList {
 	}
 
 	/**
-	 * 게시글 삭제 한 건의 게시글만 삭제할 수 있다.
+	 * 게시글 삭제: 한 건의 게시글만 삭제할 수 있다.
 	 * 
 	 * @param index 삭제하려는 게시글의 인덱스
 	 */
@@ -62,7 +62,7 @@ public class PostList {
 		//조회하려는 번호의 게시물이 있는지
 		if (postList.size() <= index) {
 			System.out.println(index + "번 게시글은 존재하지 않습니다.");
-			return; 	//read 메소드 종료
+			return; 	//게시글이 없다면 read 메소드 종료
 		}
 		
 		Post post = postList.get(index);
@@ -81,27 +81,24 @@ public class PostList {
 
 	}
 	
-	// 전체보기기능(for)
+	/**
+	 * 게시글 전체 조회 (for)
+	 */
 	public void readAll() {
 		for (int i = 0; i < postList.size(); i += 1) {
 			Post post = postList.get(i);
 			post.setView(post.getView() + 1);
-//			System.out.println("제목: " + post.getTitle());
-//			System.out.println("작성자: " + post.getWriter());
-//			System.out.println("글 번호: " + post.getNumber());
-//			System.out.println("조회수: " + post.getView());
 			System.out.println(post);
 			System.out.println("");
 		}
 	}
-
+	
+	/**
+	 * 게시글 전체 조회 (for-each)
+	 */
 	public void readAllWithoutIndex() {
 		for (Post post: postList) {
 			post.setView(post.getView() + 1);
-//			System.out.println("제목: " + post.getTitle());
-//			System.out.println("작성자: " + post.getWriter());
-//			System.out.println("글 번호: " + post.getNumber());
-//			System.out.println("조회수: " + post.getView());
 			System.out.println(post);
 			System.out.println("");
 		}
@@ -114,29 +111,6 @@ public class PostList {
 		post.create("제목2", "땅콩");
 		post.create("제목3", "캐슈넛");
 
-//		post.read(0);
-//		post.read(1);
-//		post.read(2);
-//
-//		post.read(1);
-//		post.read(2);
-//		post.read(0);
-//		post.read(1);
-//		
-//		post.update(1, "제목 2-1");
-//		post.read(1);
-//		
-//		post.delete(0);
-//		
-//		post.read(2);
-		
-//		post.readAll();
-//		
-//		System.out.println("=========");
-//		
-//		post.readAllWithoutIndex();
-		
-		//무한반복
 		Scanner scan = new Scanner(System.in);
 		
 		while (true) {			
@@ -184,7 +158,5 @@ public class PostList {
 			
 		}
 		
-
-
 	}
 }

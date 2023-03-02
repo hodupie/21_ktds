@@ -9,7 +9,7 @@ package board;
 public class Post {
 	
 	/**
-	 * 제목
+	 * 글 제목
 	 */
 	private String title;
 	

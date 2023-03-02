@@ -15,6 +15,6 @@ public class Product {
 	/***
 	 * 재고
 	 */
-	int quntity;
+	int quantity;
 
 }

@@ -135,7 +135,7 @@ public class Stringfx {
 		List<String> urlList = Arrays.asList(url.split("[:// .]"));
 		System.out.println(urlList);
 		System.out.println("=====");
-		urlList.remove("");
+//		urlList.remove("");
 		
 		List<String> urlList2 = new ArrayList<>(Arrays.asList(url.split("[:// .]")));
 		urlList2.removeIf(e -> e.isEmpty());
