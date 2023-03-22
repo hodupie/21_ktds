@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AJAX 실습</title>
+        <script src = "../../jquery-3.6.4.min.js"></script>
+        <script>
+            $().ready(function(){
+                $("#btn_github").click(function(event) {
+                    $.get("https://api.github.com/users", function(response) {
+                        $("#github_data").text("");
+                        console.log(response);
+                        var ul = $("<ul></ul>");
+                        for (var i in response) {
+                            var item = response[i];
+                            var li = $("<li></li>");
+                            var div = $("<div></div>");
+                            div.append("<img src = '"+ item.avatar_url + "' />");
+                            div.append("<p><a href = '" + item.html_url + "'>" + item.login + "</a></p>");
+                            
+                            li.append(div);
+                            ul.append(li);
+                        }
+                        $("#github_data").append(ul);
+                    });
+                })
+            });
+        </script>
+        <style>
+            ul{
+                list-style: none;
+            }
+
+            ul li {
+                margin: 0px;
+                padding: 0px;
+                display: inline-block;
+                margin-right: 10px;
+            }
+
+            ul li:last-child {
+                margin-right: 0px;
+            }
+
+            ul li div {
+                margin-bottom: 20px;
+            }
+            ul li p {
+                margin: 5px;
+                text-align: center;
+            }
+
+            ul li img {
+                width: 150px;
+                border-radius: 75px;
+            }
+            
+            a {
+                color: #333;
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: blue;
+            }
+
+            a:active {
+                color: #999;
+            }
+
+            a:visited {
+                color:chocolate;
+            }
+
+        </style>
+    </head>
+    <body>
+        <button id = "btn_github">Github 요청</button>
+        <div id = "github_data">
+            Github 데이터 표시
+        </div>
+    </body>
+</html>

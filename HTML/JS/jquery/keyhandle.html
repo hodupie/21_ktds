@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>키 이벤트</title>
+        <script src = "../../jquery-3.6.4.min.js"></script>
+        <script>
+            $().ready(function() {
+                // $(".count").keypress(function(event) {
+                //     console.log("keypress", $(this).val());
+                // });
+
+                // $(".count").keydown(function(event) {
+                //     console.log("keydown", $(this).val());
+                // });
+
+                $(".count").keyup(function(event) {
+                    var ticketValue = $(this).val();
+                    var price = $(this).closest(".vacation").data("price");
+                    // ticketValue를 숫자로 바꾸어서 계산 (ticketValue가 0으로 시작하면 문자로 인식)
+                    ticketValue = parseInt(ticketValue);
+                    var totalPrice = ticketValue * price;
+                    $("#totalPrice").text(totalPrice);
+
+                });
+            });
+        </script>
+
+        <style>
+            body {
+                background-color: #51595F;
+            }
+
+            h1, h2, p, div {
+                color: #FFF;
+            }
+
+            .vacation {
+                padding: 20px;
+                background-color: #3C444A;
+                width: 200px;
+                padding-bottom: 50px;
+            }
+
+            h3 {
+                margin: 0px;
+                color: #989BA1;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>jQuery Travels - Trip Planner</h1>
+        <h2>Packages</h2>
+        <div class = "vacation" data-price = "399.99">
+            <h3>Hawaiian Vacation</h3>
+            <p>$399.99 per ticket</p>
+            <div>
+                Tickets:
+                <input type = "number" class = "count" value = "1"/>
+            </div>
+        </div>
+        <p>
+            Total Price: $<span id = "totalPrice">399.99</span>
+        </p>
+    </body>
+</html>

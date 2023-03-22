@@ -1,0 +1,165 @@
+body {
+    background-color: #555;
+    margin: 0px;
+}
+
+#good_gag {
+    width: 680px;
+    background-color: #FFF;
+    margin: 0 auto;
+}
+
+#logo_btn{
+    background-color: #fed50a;
+    position: relative;
+    height: 40px;
+    border-bottom: 1px solid #e3a20e;
+}
+
+#logo {
+    display: inline-block;
+    position: absolute;
+    left: 5px;
+    top: 2px;
+
+}
+
+#btn {
+    display: inline-block;
+    position: absolute;
+    right: 5px;
+    top: 4px;
+}
+
+#menu {
+    background-color: #F5F5F5;
+    text-align: center;
+    border-bottom: 1px solid #afafaf;
+}
+
+#menu > ul{
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+}
+
+#menu li {
+    display: inline-block;
+    width: 280px;
+    margin-left: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+#menu li:first-child {
+    margin-left: 0px;
+    color: #f94064;
+    border-bottom: 3px solid #f94064;
+}
+
+#contents > ul{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 20px;
+}
+
+#contents .article_meta {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+#contents .article_meta > li {
+    display: inline-block;
+    color: #999999;
+    font-size: 12px;
+}
+
+#contents .article_meta > li:first-child{
+    color: #c46a33;
+}
+
+#contents .article_meta > li::after {
+    margin-left: 12px;
+    margin-right: 12px;
+    color: #f1f1f1;
+    content: "|";
+}
+
+#contents .article_meta > li:last-child::after {
+    content: "";
+}
+
+#contents .article_title .reply_count {
+    color: #ff5722;
+    font-size: 14px;
+}
+
+#contents .article_title .reply_count::before{
+    content: "[";
+}
+
+#contents .article_title .reply_count::after{
+    content: "]";
+}
+
+#contents .article {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #EEE;
+}
+
+#paging{
+    background-color: #f1f1f1;
+    text-align: center;
+}
+
+#paging ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#paging ul > li {
+    display: inline-block;
+}
+
+#paging .btn {
+    background-color: #FFF;
+    color: #888;
+    border: 1px solid #CCC;
+    font-size: 14px;
+    height: 30px;
+    border-radius: 3px;
+    vertical-align: top;
+}
+
+#footer{
+    background-color: #262626;
+    height: 130px;
+    text-align: center;
+}
+
+#footer > #login {
+    padding: 10px;
+}
+
+#footer > #login > button {
+    padding: 5px;
+    font-size: 16px;
+    color: #aaa;
+    border: 1px solid #333;
+    background-color: #373737;
+    border-radius: 3px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+#footer > #smaple {
+    color: #888;
+    margin-top: 10px;
+    font-size: 17px;
+}

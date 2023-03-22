@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQuery 실습1</title>
+        <!-- jQuery Import -->
+        <script src = "../../jquery-3.6.4.min.js"></script>
+        <script>
+            // jQuery 로딩
+            $().ready(function() { 
+                $("#destinations")
+                    .children("li")
+                    .parent()
+                    .css("backgroundColor", "#F00"); 
+                });
+        </script>
+    </head>
+    <body>
+        <h1>Where do yo want to go?</h1>
+        <h2>Travel destinations</h2>
+        <p>Plan yor next adventures</p>
+        <ul id = "destinations">
+            <li>Rome</li>
+            <ul id = "france">
+                <li>Paris</li>
+            </ul>
+            <li class="promo">Rio</li>
+        </ul>
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Animation Handle</title>
+        <script src = "../../jquery-3.6.4.min.js"></script>
+        <script>
+            $().ready(function() {
+                $(".box").mouseenter(function(event){
+                    $(this).stop();
+                    $(this).animate({height: '200px'}, 200);
+                }).mouseleave(function(event){
+                    $(this).stop();
+                    $(this).animate({height: '100px'}, 200);
+                });
+            })
+        </script>
+        <style>
+            body {
+                margin-top: 20px;
+            }
+
+            .box {
+                width: 100px;
+                height: 100px;
+                background-color: #666;
+                margin-top: 20px;
+                vertical-align: top;
+            }
+
+            .inline {
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <div class = "box inline"></div>
+        <div class = "box inline"></div>
+        <div class = "box inline"></div>
+        <div class = "box inline"></div>
+        <div class = "box inline"></div>
+        <div class = "box inline"></div>
+    </body>
+</html>

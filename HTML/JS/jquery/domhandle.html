@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DOM Handle</title>
+        <script src = "../../jquery-3.6.4.min.js"></script>
+        <script>
+            $().ready(function() {
+                $("button").click(function(event) {
+                    // this(=button)의 가장 가까운 ".vacation" 부모를 변수 vac으로 가져온다
+                    var vac = $(this).closest(".vacation");    
+                    // 변수 vac의 price 속성의 값을 가져온다
+                    var price = $(vac).data("price");
+                    var priceElement = $("<p class = 'price'>From $" + price + "</p>");
+
+                    vac.append(priceElement);
+
+                    $(this).remove();
+                
+                });
+                
+                // 새롭게 추가된 DOM에 대해 Click 이벤트 부여
+                $(".vacation") // JQuery
+                   .on("click", "p.price", function(event){
+                        alert("!");
+                   }) // 새롭게 생성된 일반 DOM
+            });
+        </script>
+        <style>
+            body {
+                margin: 0;
+                margin-top: 20px;
+                margin-left: 20px;
+                background-color: #666;
+            }
+            h1 {
+                color: #FFF;
+                font-weight: bold;
+                margin:0;
+                padding:0;
+            }
+            
+            p {
+                margin:0;
+                padding:0;
+                color: #aaa;
+                font-weight: bold;
+            }
+
+            ul{
+                margin:0px;
+                margin-top: 30px;
+                padding:0;
+                list-style: none;
+                display: inline-block;
+            }
+
+            li {
+                background-color: #0003;
+                display: inline-block;
+                margin:0;
+                padding: 15px;
+            }
+
+            h2{
+                margin: 0;
+                padding: 0;
+                color:#AAA;
+            }
+
+            .comments {
+                margin-top: 15px;
+                color: #fff;
+            }
+
+
+
+            button {
+                font-weight: bold;
+                background-color: #0F0;
+                border:0;
+                text-align: center;
+                width:100%;
+                height: 20px;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <h1>Vacation Packages</h1>
+        <p>JQuery Travels</p>
+        <ul>
+            <li class = "vacation" data-price="399.99">
+                <h2>Hawaiian Vacation</h2>
+                <p class = "comments">Comment on this deal:</p>
+                <p class = "comment">"Amazing Deal!"</p>
+                <p class = "comment">"Can't wait to take this trip!"</p>
+                <div id = "btn">
+                    <button>GET PRICE</button>
+                </div>
+            </li>
+        </ul>
+
+        <ul>
+            <li class = "vacation" data-price="299.99">
+                <h2>Hawaiian Vocation</h2>
+                <p class = "comments">Comment on this deal:</p>
+                <p class = "comment">"Amazing Deal!"</p>
+                <p class = "comment">"Can't wait to take this trip!"</p>
+                <div id = "btn">
+                    <button>GET PRICE</button>
+                </div>
+            </li>
+        </ul>
+
+        <ul>
+            <li class = "vacation" data-price="599.99">
+                <h2>Hawaiian Vocation</h2>
+                <p class = "comments">Comment on this deal:</p>
+                <p class = "comment">"Amazing Deal!"</p>
+                <p class = "comment">"Can't wait to take this trip!"</p>
+                <div id = "btn">
+                    <button>GET PRICE</button>
+                </div>
+            </li>
+        </ul>
+    </body>
+</html>

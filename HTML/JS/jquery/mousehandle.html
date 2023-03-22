@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>마우스 이벤트</title>
+        <script src = "../../jquery-3.6.4.min.js"></script>
+        <script>
+            $().ready(function() {
+                // h2에 마우스가 들어오면
+                $("h2").mouseover(function(event){
+                   $(".ticket").show();
+                });
+
+                // h2에서 마우스가 나가면
+                $("h2").mouseout(function(event){
+                    $(".ticket").hide()
+                });
+            });
+        </script>
+
+        <style>
+            body {
+                margin: 10px;
+                background-color: #4D555B;
+            }
+
+            h1, h3, p {
+                color: #FFF;
+            }
+
+            h2 {
+                color: #959B9F;
+            }
+
+            .ticket {
+                display: none;
+            }
+            button{
+                padding: 2px;
+                background-color: #6CC742;
+                font-weight: bold;
+                border: 1px solid #003;
+                width: 150px; 
+            }
+        </style>
+    </head>
+    <body>
+        <h1>JQuery Travels - Vacation Confirmation</h1>
+        <h3>Confirmations</h3>
+        <h2>Hawaiian Vacation</h2>
+        <p class = "ticket">Ticket <input type = "text"></p>
+        <p>Paid $399.99 on January 14, 2013.</p>
+        <div>
+            <button>FLIGHT DETAILS</button>
+        </div>
+    </body>
+</html>

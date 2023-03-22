@@ -1,0 +1,124 @@
+body {
+    margin: 0;
+}
+
+* {
+    font-size: 15px;
+    color: #333;
+}
+
+#content {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+#list_info {
+    position: relative;
+    padding: 10px;
+}
+
+#list_info #left {
+    display: inline-block;
+}
+
+#list_info #left .cnt {
+    color: #2775c4;
+    font-weight: bold;
+}
+
+#list_info #right {
+    display: inline-block;
+    position:absolute;
+    right: 0;
+}
+
+#list_info #right ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    display: inline-block;
+}
+
+#list_info #right ul li {
+    padding: 0;
+    display: inline-block;
+}
+
+#list_info #right ul li::after {
+    margin-left: 10px;
+    margin-right: 5px;
+    content: "|";
+    color: #d3d3d3;
+}
+
+#list_info #right ul li.active {
+    font-weight: bolder;
+}
+
+#list_info #right ul li:last-child::after {
+    margin: 0;
+    content: "";
+    font-weight: normal;
+}
+
+#data_grid {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#data_grid > thead > tr > th {
+    border-top: 2px solid #333;
+    border-bottom: 1px solid #e0e0e0;
+    height: 40px;
+    background-color: #f7f7f7;
+}
+
+#data_grid > tbody > tr > td {
+    border-bottom: 1px solid #e0e0e0;
+    height: 40px;
+}
+
+#data_grid > tbody td.align_center {
+    text-align: center;
+}
+
+#paging {
+    text-align: center;
+}
+#paging ul {
+    display: inline-block;
+    margin: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+#paging ul li {
+    display: inline-block;
+    padding: 10px;
+    line-height: 10px;
+}
+
+#paging ul li:first-child{
+    margin-left: 0px;
+}
+
+#paging .now_page {
+    border: 1px solid #3671c8;
+    color: #3671c8;
+}
+
+#buttons {
+    position: relative;
+}
+
+#buttons .new_btn {
+    position: absolute;
+    right: 0px;
+    background-color: #3671c8;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
