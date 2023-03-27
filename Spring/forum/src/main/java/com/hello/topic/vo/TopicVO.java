@@ -2,6 +2,7 @@ package com.hello.topic.vo;
 
 import java.util.List;
 
+import com.hello.attachfile.vo.AttachFileVO;
 import com.hello.member.vo.MemberVO;
 import com.hello.reply.vo.ReplyVO;
 
@@ -12,8 +13,6 @@ public class TopicVO {
 	private String email;
 	private String crtDt;
 	private String mdfyDt;
-	private String fileName;
-	private String originFileName;
 	
 	/**
 	 * 작성자 정보
@@ -24,7 +23,20 @@ public class TopicVO {
 	 * 댓글 정보
 	 */
 	private List<ReplyVO> replyList;
+	
+	/**
+	 * 첨부파일 정보
+	 */
+	private List<AttachFileVO> attachFileList;
 
+
+	public List<AttachFileVO> getAttachFileList() {
+		return attachFileList;
+	}
+
+	public void setAttachFileList(List<AttachFileVO> attachFileList) {
+		this.attachFileList = attachFileList;
+	}
 
 	public List<ReplyVO> getReplyList() {
 		return replyList;
@@ -80,22 +92,6 @@ public class TopicVO {
 
 	public void setMdfyDt(String mdfyDt) {
 		this.mdfyDt = mdfyDt;
-	}
-
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	public String getOriginFileName() {
-		return originFileName;
-	}
-
-	public void setOriginFileName(String originFileName) {
-		this.originFileName = originFileName;
 	}
 
 	public MemberVO getMemberVO() {

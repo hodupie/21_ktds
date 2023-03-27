@@ -28,6 +28,12 @@
 				<result property="name" column="R_NAME" />
 			</association>
 		</collection>
+		<collection property="attachFileList"
+					 ofType="com.hello.attachfile.vo.AttachFileVO"
+					 autoMapping="true">
+				<id property="fileId" column="FILE_ID" />
+				<result property="topicId" column="AF_TOPIC_ID" />
+		</collection>
 	</resultMap>
 	<select id="readAllTopics"
 			resultMap="topicMap">
@@ -38,8 +44,6 @@
 		     , B.EMAIL
 		     , TO_CHAR(B.CRT_DT, 'YYYY-MM-DD HH24:MI:SS') CRT_DT
 		     , TO_CHAR(B.MDFY_DT, 'YYYY-MM-DD HH24:MI:SS') MDFY_DT
-		     , B.FILE_NAME
-		     , B.ORIGIN_FILE_NAME
 			 , M.NAME
 			 , R.REPLY_ID
 			 , R.TOPIC_ID
@@ -48,13 +52,21 @@
 			 , R.CRT_DT R_CRT_DT
 			 , R.MDFY_DT R_MDFY_DT
 			 , RM.NAME R_NAME
+			 , AF.FILE_ID
+			 , AF.TOPIC_ID AF_TOPIC_ID
+			 , AF.ORIGIN_FILE_NAME
+			 , AF.UUID_FILE_NAME
+			 , AF.FILE_SIZE
+			 , AF.FILE_EXT
 		  FROM BOARD B
 		 INNER JOIN MEMBERS M  
 		    ON B.EMAIL = M.EMAIL
 		  LEFT JOIN REPLIES R 
 		    ON B.ID = R.TOPIC_ID 
 		  LEFT JOIN MEMBERS RM 
-		    ON R.EMAIL = RM.EMAIL 
+		    ON R.EMAIL = RM.EMAIL
+		  LEFT JOIN ATTACHED_FILES AF
+		    ON B.ID = AF.TOPIC_ID		     
 		 ORDER BY B.MDFY_DT DESC
 	</select>
 	
@@ -68,8 +80,6 @@
 		     , B.EMAIL
 		     , TO_CHAR(B.CRT_DT, 'YYYY-MM-DD HH24:MI:SS') CRT_DT
 		     , TO_CHAR(B.MDFY_DT, 'YYYY-MM-DD HH24:MI:SS') MDFY_DT
-		     , B.FILE_NAME
-		     , B.ORIGIN_FILE_NAME
 			 , M.NAME
 			 , R.REPLY_ID
 			 , R.TOPIC_ID
@@ -78,13 +88,21 @@
 			 , R.CRT_DT R_CRT_DT
 			 , R.MDFY_DT R_MDFY_DT
 			 , RM.NAME R_NAME
+			 , AF.FILE_ID
+			 , AF.TOPIC_ID AF_TOPIC_ID
+			 , AF.ORIGIN_FILE_NAME
+			 , AF.UUID_FILE_NAME
+			 , AF.FILE_SIZE
+			 , AF.FILE_EXT			 
 		  FROM BOARD B
 		 INNER JOIN MEMBERS M  
 		    ON B.EMAIL = M.EMAIL
 		  LEFT JOIN REPLIES R 
 		    ON B.ID = R.TOPIC_ID 
 		  LEFT JOIN MEMBERS RM 
-		    ON R.EMAIL = RM.EMAIL 
+		    ON R.EMAIL = RM.EMAIL
+		  LEFT JOIN ATTACHED_FILES AF
+		    ON B.ID = AF.TOPIC_ID	
 		 WHERE B.ID = #{_parameter}
          START WITH R.PRNT_REPLY_ID = 0
   	        OR R.PRNT_REPLY_ID IS NULL
@@ -103,18 +121,14 @@
 		  , CONTENT
 		  , EMAIL
 		  , CRT_DT
-		  , MDFY_DT
-		  , FILE_NAME
-		  , ORIGIN_FILE_NAME)
+		  , MDFY_DT)
 		VALUES
 		   (#{id}
 		  , #{subject}
 		  , #{content}
 		  , #{email}
 		  , SYSDATE
-		  , SYSDATE
-		  , #{fileName}
-		  , #{originFileName})
+		  , SYSDATE)
 	</insert>
 	
 	<update id="updateOneTopic"
@@ -123,8 +137,6 @@
 		   SET SUBJECT = #{subject}
 		   	 , CONTENT = #{content}
 		   	 , MDFY_DT = SYSDATE
-		   	 , FILE_NAME = #{fileName}
-		   	 , ORIGIN_FILE_NAME = #{originFileName}
 		 WHERE ID = #{id}
 	</update>
 	

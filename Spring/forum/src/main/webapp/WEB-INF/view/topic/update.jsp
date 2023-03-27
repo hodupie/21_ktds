@@ -5,9 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.4.min.js"></script>
+<script type="text/javascript">
+	$().ready(function(){
+	});
+</script>
 </head>
 <body>
-	<form action="/forum/topic/update/${topic.id}" method="post">
+	<form action="${pageContext.request.contextPath}/topic/update/${topic.id}" method="post">
 		<div>
 			<label for="subject">제목</label>
 			<input type="text"

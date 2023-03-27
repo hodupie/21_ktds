@@ -2,21 +2,37 @@ package com.hello.topic.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.hello.common.handler.UploadHandler;
 import com.hello.topic.service.TopicService;
 import com.hello.topic.vo.TopicVO;
 
 @Controller
 public class TopicController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(TopicController.class);
+	
 	@Autowired
 	private TopicService topicService;
+	
+	@Autowired
+	private UploadHandler uploadHandler;
+	
+	@Value("${upload.path}")
+	private String uploadPath;
 	
 	@GetMapping("/topics")
 	public String viewTopicListPage(Model model) {
@@ -27,7 +43,10 @@ public class TopicController {
 	
 	@GetMapping("/topic/{topicId}")
 	public String viewTopicDetailPage(@PathVariable int topicId, Model model) {
-		System.out.println("URL 변수 topicId의 값: " + topicId);
+//		System.out.println("URL 변수 topicId의 값: " + topicId);
+		logger.info("URL 변수 topicId의 값: ", topicId);
+		
+		Integer.parseInt("ABC");
 		
 		TopicVO topic = topicService.readOneTopicByTopicID(topicId);
 		model.addAttribute("topic", topic);
@@ -40,8 +59,11 @@ public class TopicController {
 	}
 	
 	@PostMapping("/topic/write")
-	public String doTopicWrite(TopicVO topicVO) {
+	public String doTopicWrite(TopicVO topicVO, List<MultipartFile> uploadFile) {
+
 		boolean createResult = topicService.createNewTopic(topicVO);
+		uploadHandler.upload(uploadFile, topicVO.getId());
+		
 		if (!createResult) {
 			return "/topic/write";
 		}
@@ -79,4 +101,12 @@ public class TopicController {
 		}
 	}
 	
+	@GetMapping("/topic/download/{topicId}")
+	public void downloadFile(@PathVariable int topicId, HttpServletRequest request, HttpServletResponse response) {
+		
+		TopicVO topic = topicService.readOneTopicByTopicID(topicId);
+//		filename, originfilename
+//		new DownloadUtil(response, request, this.uploadPath + "/" + topic.).download(topic.getAttachFileList().);
+		
+	}
 }

@@ -6,9 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.4.min.js"></script>
+<script type="text/javascript">
+	$().ready(function(){
+	});
+</script>
 </head>
 <body>
 	<h1>Topics</h1>
+	
+	<div>
+		<a href="${pageContext.request.contextPath}/member/regist">회원가입</a>
+	</div>
 	
 	<div>총 ${topicList.size()}건</div>
 	<div>
@@ -28,7 +38,7 @@
 							<tr>
 								<td>${topic.id}</td>
 								<td>
-									<a href="/forum/topic/${topic.id}">
+									<a href="${pageContext.request.contextPath}/topic/${topic.id}">
 										${topic.subject} (${topic.replyList.size()})
 									</a>
 								</td>
@@ -49,7 +59,7 @@
 		</table>
 	</div>
 	<div>
-		<a href="/forum/topic/write">토픽 작성</a>
+		<a href="${pageContext.request.contextPath}/topic/write">토픽 작성</a>
 	</div>
 </body>
 </html>

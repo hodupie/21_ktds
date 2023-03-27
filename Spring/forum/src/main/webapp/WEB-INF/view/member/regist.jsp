@@ -5,10 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.4.min.js"></script>
+<script type="text/javascript">
+	$().ready(function(){
+	});
+</script>
 </head>
 <body>
 	<h1>회원가입을 환영합니다!</h1>
-	<form action="/forum/member/regist" method="post">
+	<form action="${pageContext.request.contextPath}/member/regist" method="post">
 		<div>
 			<label for="email">이메일:</label>
 			<input type="email" name="email" id="email" placeholder="EMAIL을 입력하세요." />
