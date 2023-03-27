@@ -22,7 +22,9 @@ public class MemberServiceImpl implements MemberService {
 		if (emailCount == 0) {
 			insertCount = memberDAO.createNewMember(memberVO);
 		}
-		
+		else {
+			throw new RuntimeException("이미 존재하는 아이디입니다!");
+		}
 		// 3. 있다면 false 리턴
 		return insertCount > 0;
 	}

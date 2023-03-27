@@ -5,7 +5,14 @@ public class MemberVO {
 	private String email;
 	private String name;
 	private String password;
+	private String passwordConfirm;
 	
+	public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
+	}
 	public String getEmail() {
 		return email;
 	}

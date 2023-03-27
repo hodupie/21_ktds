@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.hello.attachfile.service.AttachFileService;
+import com.hello.attachfile.dao.AttachFileDAO;
 import com.hello.attachfile.vo.AttachFileVO;
 
 @Component
@@ -20,7 +20,7 @@ public class UploadHandler {
 	private String uploadPath;
 	
 	@Autowired
-	private AttachFileService attachFileService;
+	private AttachFileDAO attachFileDAO;
 	
 	// 여러 개의 파일 처리
 	public void upload(List<MultipartFile> multipartFileList, int topicId) {
@@ -68,7 +68,7 @@ public class UploadHandler {
 			attachFileVO.setFileSize(multipartFile.getSize());
 			String ext = originFileName.substring(originFileName.lastIndexOf(".") + 1);
 			attachFileVO.setFileExt(ext);
-			attachFileService.createAttachFile(attachFileVO);
+			attachFileDAO.createAttachFile(attachFileVO);
 		}
 	}
 }

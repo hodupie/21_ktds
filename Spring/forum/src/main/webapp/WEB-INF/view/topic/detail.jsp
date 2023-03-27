@@ -26,7 +26,10 @@
 		/ 수정일: ${topic.mdfyDt}
 	</div>
 	<div>
-		첨부파일: <a href="${pageContext.request.contextPath}/topic/download/${topic.id}">${topic.originFileName}</a>
+		첨부파일: 
+		<c:forEach items="${topic.attachFileList}" var="file">
+			<a href="${pageContext.request.contextPath}/file/download/${file.topicId}/${file.fileId}">${file.originFileName}</a>
+		</c:forEach>
 	</div>
 	<div>
 		${topic.content}

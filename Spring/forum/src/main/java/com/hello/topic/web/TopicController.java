@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hello.attachfile.vo.AttachFileVO;
+import com.hello.common.handler.DownloadUtil;
 import com.hello.common.handler.UploadHandler;
 import com.hello.topic.service.TopicService;
 import com.hello.topic.vo.TopicVO;
@@ -27,9 +29,7 @@ public class TopicController {
 	
 	@Autowired
 	private TopicService topicService;
-	
-	@Autowired
-	private UploadHandler uploadHandler;
+
 	
 	@Value("${upload.path}")
 	private String uploadPath;
@@ -45,8 +45,7 @@ public class TopicController {
 	public String viewTopicDetailPage(@PathVariable int topicId, Model model) {
 //		System.out.println("URL 변수 topicId의 값: " + topicId);
 		logger.info("URL 변수 topicId의 값: ", topicId);
-		
-		Integer.parseInt("ABC");
+
 		
 		TopicVO topic = topicService.readOneTopicByTopicID(topicId);
 		model.addAttribute("topic", topic);
@@ -61,8 +60,8 @@ public class TopicController {
 	@PostMapping("/topic/write")
 	public String doTopicWrite(TopicVO topicVO, List<MultipartFile> uploadFile) {
 
-		boolean createResult = topicService.createNewTopic(topicVO);
-		uploadHandler.upload(uploadFile, topicVO.getId());
+		boolean createResult = topicService.createNewTopic(topicVO, uploadFile);
+//		uploadHandler.upload(uploadFile, topicVO.getId());
 		
 		if (!createResult) {
 			return "/topic/write";
@@ -105,8 +104,9 @@ public class TopicController {
 	public void downloadFile(@PathVariable int topicId, HttpServletRequest request, HttpServletResponse response) {
 		
 		TopicVO topic = topicService.readOneTopicByTopicID(topicId);
-//		filename, originfilename
-//		new DownloadUtil(response, request, this.uploadPath + "/" + topic.).download(topic.getAttachFileList().);
+		AttachFileVO attachFile = topic.getAttachFileList().get(0);
+		
+		new DownloadUtil(response, request, this.uploadPath + "/" + attachFile.getUuidFileName()).download(attachFile.getOriginFileName());
 		
 	}
 }
