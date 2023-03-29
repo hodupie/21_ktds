@@ -15,9 +15,9 @@
 </head>
 <body>
 	<h1>Topics</h1>
-	
+
 	<div>
-		<a href="${pageContext.request.contextPath}/member/regist">회원가입</a>
+		<a href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
 	</div>
 	
 	<div>총 ${topicList.size()}건</div>

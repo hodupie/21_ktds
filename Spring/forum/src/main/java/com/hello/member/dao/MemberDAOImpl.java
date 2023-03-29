@@ -28,7 +28,7 @@ public class MemberDAOImpl extends SqlSessionDaoSupport implements MemberDAO{
 
 	@Override
 	public MemberVO readOneMemberByEmailAndPassword(MemberVO memberVO) {
-		return getSqlSession().selectOne("Member.ID", memberVO);
+		return getSqlSession().selectOne("Member.readOneMemberByEmailAndPassword", memberVO);
 	}
 
 }

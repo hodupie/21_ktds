@@ -19,10 +19,6 @@
 			<input type="text" name="subject" id="subject" placeholder="제목입력" />
 		</div>
 		<div>
-			<label for="email">이메일</label>
-			<input type="email" name="email" id="email" placeholder="이메일" />
-		</div>
-		<div>
 			<label for="content">내용</label>
 			<textarea name="content" id="content" placeholder="내용"></textarea>
 		</div>

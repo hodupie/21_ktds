@@ -14,11 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hello.attachfile.vo.AttachFileVO;
 import com.hello.common.handler.DownloadUtil;
-import com.hello.common.handler.UploadHandler;
+import com.hello.member.vo.MemberVO;
 import com.hello.topic.service.TopicService;
 import com.hello.topic.vo.TopicVO;
 
@@ -58,10 +59,11 @@ public class TopicController {
 	}
 	
 	@PostMapping("/topic/write")
-	public String doTopicWrite(TopicVO topicVO, List<MultipartFile> uploadFile) {
-
+	public String doTopicWrite(TopicVO topicVO, List<MultipartFile> uploadFile, @SessionAttribute("__USER_SESSION_DATA__") MemberVO memberVO) {
+		
+		topicVO.setEmail(memberVO.getEmail());
+		
 		boolean createResult = topicService.createNewTopic(topicVO, uploadFile);
-//		uploadHandler.upload(uploadFile, topicVO.getId());
 		
 		if (!createResult) {
 			return "/topic/write";
@@ -88,8 +90,9 @@ public class TopicController {
 	}
 	
 	@PostMapping("/topic/update/{topicId}")
-	public String doTopicUpdate(@PathVariable int topicId, TopicVO topicVO) {
+	public String doTopicUpdate(@PathVariable int topicId, TopicVO topicVO, @SessionAttribute("__USER_SESSION_DATA__") MemberVO memberVO) {
 		topicVO.setId(topicId);
+		topicVO.setEmail(memberVO.getEmail());
 		boolean updateResult = topicService.updateOneTopic(topicVO);
 		
 		if (updateResult) {
@@ -100,13 +103,13 @@ public class TopicController {
 		}
 	}
 	
-	@GetMapping("/topic/download/{topicId}")
-	public void downloadFile(@PathVariable int topicId, HttpServletRequest request, HttpServletResponse response) {
-		
-		TopicVO topic = topicService.readOneTopicByTopicID(topicId);
-		AttachFileVO attachFile = topic.getAttachFileList().get(0);
-		
-		new DownloadUtil(response, request, this.uploadPath + "/" + attachFile.getUuidFileName()).download(attachFile.getOriginFileName());
-		
-	}
+//	@GetMapping("/topic/download/{topicId}")
+//	public void downloadFile(@PathVariable int topicId, HttpServletRequest request, HttpServletResponse response) {
+//		
+//		TopicVO topic = topicService.readOneTopicByTopicID(topicId);
+//		AttachFileVO attachFile = topic.getAttachFileList().get(0);
+//		
+//		new DownloadUtil(response, request, this.uploadPath + "/" + attachFile.getUuidFileName()).download(attachFile.getOriginFileName());
+//		
+//	}
 }

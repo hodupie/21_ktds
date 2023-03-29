@@ -1,10 +1,13 @@
 package com.hello.member.web;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -20,10 +23,53 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	
+	@GetMapping("/member/login")
+	public String viewLoginPage() {
+		return "member/login";
+	}
+	
+	@PostMapping("/member/login")
+	public String doLogin(MemberVO memberVO, HttpSession session, Model model) {
+		// 파라미터 검증
+		if (memberVO.getEmail() == null || memberVO.getEmail().length() == 0) {
+			throw new RuntimeException("email은 필수값입니다.");
+		}
+
+		if (memberVO.getPassword() == null || memberVO.getPassword().length() == 0) {
+			throw new RuntimeException("password는 필수값입니다.");
+		}
+		
+		// 1. 로그인 처리
+		// 1-1. 회원 데이터 조회
+		MemberVO memberData = memberService.readOneMemberByEmailAndPassword(memberVO);
+		// 1-2. 회원 데이터가 있는지 확인
+		if (memberData != null) {
+			// 로그인 성공 및 세션에 데이터 저장
+			session.setAttribute("__USER_SESSION_DATA__", memberData);
+		}
+		else {
+			// 로그인 실패
+			model.addAttribute("errorCode", "NOT_FOUND_USER");
+			return "member/login";
+		}
+		
+		// 2. 로그인 실패 시 (이메일 또는 비밀번호가 틀렸을 때) 처리
+		
+		return "redirect:/topics";
+	}
+	
+	@GetMapping("/member/logout")
+	public String doLogout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/member/login";
+	}
+	
 	@GetMapping("/member/regist")
 	public String viewMemberRegistPage() {
 		return "member/regist";
 	}
+	
 	
 //	파라미터를 받아오는 방법 1: 고전적인 방법
 //	@PostMapping("/member/regist")
@@ -88,7 +134,6 @@ public class MemberController {
 		if (StringUtil.isEmpty(passwordConfirm)) {
 			throw new RuntimeException("passwordConfirm은 필수 값입니다.");
 		}
-		
 		if (StringUtil.isExceedLength(email, 100)) {
 			throw new RuntimeException("email은 100글자까지 작성할 수 있습니다.");
 		}
