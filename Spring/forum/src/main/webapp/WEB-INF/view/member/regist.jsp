@@ -19,7 +19,6 @@
 				$("#dup_email").hide();
 				return;
 			}
-			 
 			
 			var url = "${pageContext.request.contextPath}/api/member/check/" + emailValue + "/";
 			$.get(url, function(response) {
