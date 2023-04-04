@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hello.common.Util.StringUtil;
 import com.hello.common.exceptions.AjaxResponseException;
+import com.hello.common.util.StringUtil;
 import com.hello.member.Service.MemberService;
 import com.hello.member.vo.MemberVO;
 

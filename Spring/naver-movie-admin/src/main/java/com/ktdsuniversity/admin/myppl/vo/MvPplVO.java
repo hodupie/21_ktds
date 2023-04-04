@@ -1,9 +1,12 @@
 package com.ktdsuniversity.admin.myppl.vo;
 
+import com.ktdsuniversity.admin.common.AbstractVO;
+import com.ktdsuniversity.admin.mbr.vo.MbrVO;
+
 /**
  * MV_PPL
  */
-public class MvPplVO {
+public class MvPplVO extends AbstractVO {
 
 	/**
 	 * 
@@ -54,7 +57,26 @@ public class MvPplVO {
 	 * 
 	 */
 	private String delYn;
+	
+	private MbrVO crtrMbrVO;
+	private MbrVO mdfyMbrVO;
 
+
+	public MbrVO getCrtrMbrVO() {
+		return crtrMbrVO;
+	}
+
+	public void setCrtrMbrVO(MbrVO crtrMbrVO) {
+		this.crtrMbrVO = crtrMbrVO;
+	}
+
+	public MbrVO getMdfyMbrVO() {
+		return mdfyMbrVO;
+	}
+
+	public void setMdfyMbrVO(MbrVO mdfyMbrVO) {
+		this.mdfyMbrVO = mdfyMbrVO;
+	}
 
 	public void setMvPplId(String mvPplId) {
 		this.mvPplId = mvPplId;

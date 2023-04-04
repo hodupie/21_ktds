@@ -5,13 +5,14 @@
 <mapper namespace="Gnr">
 
 	<select id="readAllGnrVO"
-			parameterType="string"
+			parameterType="com.ktdsuniversity.admin.gnr.vo.GnrVO"
 			resultType="com.ktdsuniversity.admin.gnr.vo.GnrVO">
+		<include refid="Common.page_header" />
 		SELECT G.GNR_ID
 			 , G.GNR_NM
-			 , TO_CHAR(G.CRT_DT, 'YYYY-MM-DD') CRT_DT
+			 , TO_CHAR(G.CRT_DT, 'YYYY-MM-DD HH24:MI:SS') CRT_DT
 			 , G.CRTR
-			 , TO_CHAR(G.MDFY_DT, 'YYYY-MM-DD') MDFY_DT
+			 , TO_CHAR(G.MDFY_DT, 'YYYY-MM-DD HH24:MI:SS') MDFY_DT
 			 , G.MDFYR
 			 , G.USE_YN
 			 , CRT_M.MBR_NM CRT_MBR_NM
@@ -22,10 +23,11 @@
 		 INNER JOIN MBR MDFY_M
 		    ON G.MDFYR = MDFY_M.MBR_ID
 		 WHERE G.DEL_YN = 'N'
-		<if test='_parameter != null and _parameter != ""'>		
-		   AND G.GNR_NM = {#_parameter}
+		<if test='gnrNm != null and gnrNm != ""'>		
+		   AND G.GNR_NM LIKE '%' || #{gnrNm} || '%'
 		</if>
 		 ORDER BY G.GNR_ID ASC
+		<include refid="Common.page_footer" />
 	</select>
 	
 	<insert id="createOneGnr"
@@ -46,7 +48,7 @@
 	   	     , #{crtr}
 	   	     , SYSDATE
 	   	     , #{mdfyr}
-	   	     , NVL(#{useYn}, 'N')
+	   	     , NVL(#{useYn}, 'Y')
 	   	     , 'N')
 	</insert>
 	
@@ -56,8 +58,8 @@
 	       SET GNR_NM = #{gnrNm}
 	       	 , MDFY_DT = SYSDATE
 	       	 , MDFYR = #{mdfyr}
-	       	 , USE_YN = #{useYn}
-		 WHERE GNR_ID = {gnrId}
+	       	 , USE_YN = NVL(#{useYn}, 'N')
+		 WHERE GNR_ID = #{gnrId}
 	</update>
 
 	<update id="deleteOneGnrByGnrId"
@@ -65,6 +67,16 @@
 		UPDATE GNR
 	       SET DEL_YN = 'Y' 
 		 WHERE GNR_ID = #{_parameter}
+	</update>
+	
+	<update id="deleteGnrBySelectedGnrId"
+			parameterType="arraylist">
+		UPDATE GNR
+		   SET DEL_YN = 'Y'
+		 WHERE GNR_ID IN
+		 <foreach item="gnrId" collection="list" open="(" close=")" separator=",">
+          #{gnrId}
+    	</foreach>
 	</update>
 	
 </mapper>

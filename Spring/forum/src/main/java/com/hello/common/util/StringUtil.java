@@ -1,4 +1,4 @@
-package com.hello.common.Util;
+package com.hello.common.util;
 
 public abstract class StringUtil {
 	

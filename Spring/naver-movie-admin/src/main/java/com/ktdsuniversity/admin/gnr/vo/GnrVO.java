@@ -1,9 +1,11 @@
 package com.ktdsuniversity.admin.gnr.vo;
 
+import com.ktdsuniversity.admin.common.AbstractVO;
+
 /**
  * GNR
  */
-public class GnrVO {
+public class GnrVO extends AbstractVO {
 
 	/**
 	 * 

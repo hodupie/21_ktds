@@ -113,7 +113,7 @@ a {
    width: 400px;
    border: 1px solid #ccc;
    margin-bottom: 10px;
-   padding-left: 5px;
+   padding-left: 7px;
    opacity: 0.8;
 }
 
@@ -151,6 +151,7 @@ a {
    list-style-type:none;
    position: absolute;
    bottom:10px;
+   font-size: 20px;
 }
 .main-layout > .header > .nav > .nav-item {
    display: inline-block;
@@ -158,8 +159,8 @@ a {
    margin :0px;
    color: #333;
    text-decoration: none;
-   padding: 10px;
-   font-size: 15px;
+   padding: 0px 25px;
+
 }
 
 .main-layout > .header > .nav > .nav-title-img {
@@ -280,15 +281,78 @@ a {
 
 }
 
+/* Search */
+.search-row-group {
+	display: flex;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	flex-direction: column;
+	background-color: #f3f1e6;
+}
 
 
+.search-row-group .search-group {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.search-group .btn-search {
+	background-color: #6b8cfe;
+	border-radius: 3px;
+	border: 0px;
+	color: #FFF;
+	font-weight: bold;
+	font-size: 10pt;
+}
+
+.search-group .btn-search:active {
+	background-color: #bdccff;
+}
+
+.search-group  label {
+	margin-right: 10px;
+}
+.search-group > .search-input {
+	flex-grow: 1;
+	margin-right: 10px;
+}
+
+/* Pagenate */
+.pagenate {
+	display: flex;
+	margin-top: 10px;
+	justify-content: center;
+	align-items: center;
+}
+
+.pagenate ul {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+.pagenate ul li {
+	display: inline-block;
+	margin: 0px;
+	padding: 5px;
+	background-color: #e3e3e3
+}
+
+.pagenate ul li a {
+	text-decoration: none;
+}
 
 
+.pagenate ul li a.on {
+	font-weight: bold;
+}
 
 
-
-
-
+/* margin */
+.mt-10 {
+	margin-top: 10px;
+}
 
 
 

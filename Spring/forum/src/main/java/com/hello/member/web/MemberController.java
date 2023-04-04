@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.hello.common.Util.StringUtil;
+import com.hello.common.util.StringUtil;
 import com.hello.member.Service.MemberService;
 import com.hello.member.vo.MemberVO;
 

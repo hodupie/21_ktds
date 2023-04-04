@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.ktdsuniversity.admin.gnr.vo.GnrVO;
 
 @Repository
-public class GnrDAOImpl extends SqlSessionDaoSupport implements GnrDAO{
+public class GnrDAOImpl extends SqlSessionDaoSupport implements GnrDAO {
 	
 	@Autowired
 	@Override
@@ -19,8 +19,8 @@ public class GnrDAOImpl extends SqlSessionDaoSupport implements GnrDAO{
 	}
 	
 	@Override
-	public List<GnrVO> readAllGnrVO(String gnrNm) {
-		return getSqlSession().selectList("Gnr.readAllGnrVO", gnrNm);
+	public List<GnrVO> readAllGnrVO(GnrVO gnrVO) {
+		return getSqlSession().selectList("Gnr.readAllGnrVO", gnrVO);
 	}
 
 	@Override
@@ -37,6 +37,10 @@ public class GnrDAOImpl extends SqlSessionDaoSupport implements GnrDAO{
 	public int deleteOneGnrByGnrId(int gnrId) {
 		return getSqlSession().update("Gnr.deleteOneGnrByGnrId", gnrId);
 	}
-
+	
+	@Override
+	public int deleteGnrBySelectedGnrId(List<Integer> gnrId) {
+		return getSqlSession().update("Gnr.deleteGnrBySelectedGnrId", gnrId);
+	}
 
 }
