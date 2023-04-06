@@ -13,7 +13,8 @@
 		<li class="menu-item">
 			<a href="${context}/mvppl/list">영화인 관리</a>
 		</li>
-		<li class="menu-item">영화 관리</li>
+		<li class="menu-item">
+			<a href="${context}/mv/list">영화 관리</a></li>
 		<li class="menu-item">사진 관리</li>
 		<li class="menu-item">동영상 관리</li>
 		<li class="menu-item">댓글 관리</li>

@@ -1,5 +1,10 @@
 package com.ktdsuniversity.admin.mvgnr.vo;
 
+import java.util.List;
+
+import com.ktdsuniversity.admin.gnr.vo.GnrVO;
+import com.ktdsuniversity.admin.mbr.vo.MbrVO;
+
 /**
  * MV_GNR
  */
@@ -43,8 +48,46 @@ public class MvGnrVO {
 	/**
 	 * 
 	 */
-	private String delYn;
+	private String delYn; 
+	
+	private List<String> deleted;
 
+
+	private MbrVO crtMbrVO;
+	private MbrVO mdfyrMbrVO;
+	private GnrVO gnrVO;
+
+	public List<String> getDeleted() {
+		return deleted;
+	}
+	
+	public void setDeleted(List<String> deleted) {
+		this.deleted = deleted;
+	}
+	
+	public MbrVO getCrtMbrVO() {
+		return crtMbrVO;
+	}
+
+	public void setCrtMbrVO(MbrVO crtMbrVO) {
+		this.crtMbrVO = crtMbrVO;
+	}
+
+	public MbrVO getMdfyrMbrVO() {
+		return mdfyrMbrVO;
+	}
+
+	public void setMdfyrMbrVO(MbrVO mdfyrMbrVO) {
+		this.mdfyrMbrVO = mdfyrMbrVO;
+	}
+
+	public GnrVO getGnrVO() {
+		return gnrVO;
+	}
+
+	public void setGnrVO(GnrVO gnrVO) {
+		this.gnrVO = gnrVO;
+	}
 
 	public void setMvId(String mvId) {
 		this.mvId = mvId;

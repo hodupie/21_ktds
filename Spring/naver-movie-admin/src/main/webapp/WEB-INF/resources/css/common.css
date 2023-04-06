@@ -173,7 +173,7 @@ a {
    
 }
 .main-layout > .header > .profile {
-   color: #EEE;
+   color: #444;
    position: absolute;
    right:10px;
    top:10px;
@@ -282,6 +282,10 @@ a {
 }
 
 /* Search */
+.grow-1 {
+	flex-grow: 1;
+}
+
 .search-row-group {
 	display: flex;
 	margin-top: 10px;
@@ -296,7 +300,7 @@ a {
 	margin-bottom: 0px;
 }
 
-.search-group .btn-search {
+.search-group .search-btn {
 	background-color: #6b8cfe;
 	border-radius: 3px;
 	border: 0px;
@@ -305,7 +309,7 @@ a {
 	font-size: 10pt;
 }
 
-.search-group .btn-search:active {
+.search-group .search-btn:active {
 	background-color: #bdccff;
 }
 
@@ -354,13 +358,45 @@ a {
 	margin-top: 10px;
 }
 
+.mr-10 {
+	margin-right: 10px;
+}
 
 
+/* Profile */
+input[type=file] {
+	display: none;
+}
+
+img.profile {
+	border-radius: 50px;
+	width: 100px;
+}
 
 
+/* apply form */
+.create-group {
+	display: flex	
+}
 
+.create-group label {
+	display: inline-block;
+	backgroung-color: #e3e3e3;
+	width: 130px;
+	padding: 10px;
+}
 
+.create-group input,
+.create-group select {
+	margin: 10px;
+	flex-grow: 1;
+}
 
+.create-group textarea {
+	margin: 10px;
+	flex-grow: 1;
+	height: 300px;
+}
 
 
 

@@ -82,15 +82,32 @@
 			 , 'N' )
 	</insert>
 	
+	<select id="readOneMvPplVOByMvPplId"
+			parameterType="string"
+			resultType="com.ktdsuniversity.admin.myppl.vo.MvPplVO">
+		SELECT PRFL_PHT
+		     , NM
+		     , RL_NM
+		     , USE_YN
+		     , DEL_YN
+		  FROM MV_PPL
+		 WHERE MV_PPL_ID = #{_parameter}
+		   AND DEL_YN = 'N'		
+	</select>	
+	
 	<update id="updateOneMvPpl"
 			parameterType="com.ktdsuniversity.admin.myppl.vo.MvPplVO">
 		UPDATE MV_PPL
 		   SET PRFL_PHT = #{prflPht}
+		   	<if test='nm != null and nm != ""'>
 		   	 , NM = #{nm}
+		   	</if>
 		   	 , RL_NM = #{rlNm}
 		   	 , MDFY_DT = SYSDATE
 		   	 , MDFYR = #{mdfyr}
+		   	<if test='useYn != null and useYn != ""'>
 		   	 , USE_YN = NVL(#{useYn}, 'N')
+		   	</if>
 		 WHERE MV_PPL_ID = #{mvPplId}		
 	</update>
 	

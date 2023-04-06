@@ -22,7 +22,12 @@ public class MvPplDAOImpl extends SqlSessionDaoSupport implements MvPplDAO {
 	public List<MvPplVO> readAllMvPpl(MvPplVO mvPplVO) {
 		return getSqlSession().selectList("MvPpl.readAllMvPpl", mvPplVO);
 	}
-
+	
+	@Override
+	public MvPplVO readOneMvPplVOByMvPplId(String mvPplId) {
+		return getSqlSession().selectOne("MvPpl.readOneMvPplVOByMvPplId", mvPplId);
+	}
+	
 	@Override
 	public int createOneMvPpl(MvPplVO mvPplVO) {
 		return getSqlSession().insert("MvPpl.createOneMvPpl", mvPplVO);

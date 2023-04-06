@@ -8,6 +8,8 @@ public interface GnrDAO {
 	
 	public List<GnrVO> readAllGnrVO(GnrVO gnrVO);
 	
+	public List<GnrVO> readAllGnrVONoPagination(String gnrNm);
+
 	public int createOneGnr(GnrVO gnrVO);
 	
 	public int updateOneGnr(GnrVO gnrVO);
@@ -15,4 +17,5 @@ public interface GnrDAO {
 	public int deleteOneGnrByGnrId(int gnrId);
 	
 	public int deleteGnrBySelectedGnrId(List<Integer> gnrId);
+	
 }

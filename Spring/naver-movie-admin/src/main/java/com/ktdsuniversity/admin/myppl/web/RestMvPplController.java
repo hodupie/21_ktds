@@ -37,24 +37,21 @@ public class RestMvPplController {
 		mvPplVO.setCrtr(mbrVO.getMbrId());
 		mvPplVO.setMdfyr(mbrVO.getMbrId());
 		
-		if (uploadFile != null && !uploadFile.isEmpty()) {
-			File dir = new File(profilePath);
-			if (!dir.exists()) {
-				dir.mkdirs();
-			}
-			String uuidFileName = UUID.randomUUID().toString();
-			File profileFile = new File(dir, uuidFileName);
-			
-			try {
-				uploadFile.transferTo(profileFile);
-			} catch (IllegalStateException | IOException e) {
-				logger.error(e.getMessage(), e);
-			}
-			
-			mvPplVO.setPrflPht(uuidFileName);
+		boolean isSuccess = mvPplService.createOneMvPpl(mvPplVO, uploadFile);
+		if (isSuccess) {
+			return new ApiResponseVO(ApiStatus.OK);
 		}
+		else {
+			return new ApiResponseVO(ApiStatus.FAIL);
+		}
+	}
+	
+	@PostMapping("api/mvppl/update")
+	public ApiResponseVO doUpdateMvPpl(MvPplVO mvPplVO, MultipartFile uploadFile, @SessionAttribute("__ADMIN__") MbrVO mbrVO) {
 		
-		boolean isSuccess = mvPplService.createOneMvPpl(mvPplVO);
+		mvPplVO.setMdfyr(mbrVO.getMbrId());
+		
+		boolean isSuccess = mvPplService.updateOneMvPpl(mvPplVO, uploadFile);
 		if (isSuccess) {
 			return new ApiResponseVO(ApiStatus.OK);
 		}

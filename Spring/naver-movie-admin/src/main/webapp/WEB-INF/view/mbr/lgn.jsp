@@ -12,7 +12,18 @@
 <jsp:include page="../include/stylescript.jsp" />
 <script type="text/javascript">
 	$().ready(function() {
-		$("#login-btn").click(function() {
+		
+		$("#login-btn").on("click", login);
+		
+		$("#pwd").keydown(function (key) {
+	        if (key.keyCode == 13) {
+	        	login();
+	        }
+	    });
+		
+	});
+	
+		function login() {
 			var data = {
 					mbrId: $("#mbrId").val(),
 					pwd: $("#pwd").val()
@@ -39,8 +50,8 @@
 					}
 				}
 			});
-		})
-	});
+			
+		}
 </script>
 </head>
 <body>

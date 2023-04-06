@@ -60,7 +60,16 @@ public class MvPplVO extends AbstractVO {
 	
 	private MbrVO crtrMbrVO;
 	private MbrVO mdfyMbrVO;
+	
+	private String isDeletePctr;
 
+	public String getIsDeletePctr() {
+		return isDeletePctr;
+	}
+
+	public void setIsDeletePctr(String isDeletePctr) {
+		this.isDeletePctr = isDeletePctr;
+	}
 
 	public MbrVO getCrtrMbrVO() {
 		return crtrMbrVO;

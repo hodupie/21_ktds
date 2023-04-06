@@ -1,85 +1,69 @@
 package com.ktdsuniversity.admin.mv.vo;
 
+import java.util.List;
+
+import com.ktdsuniversity.admin.mbr.vo.MbrVO;
+import com.ktdsuniversity.admin.mvgnr.vo.MvGnrVO;
+import com.ktdsuniversity.admin.prdcprtcptnppl.vo.PrdcPrtcptnPplVO;
+
 /**
  * MV
  */
 public class MvVO {
 
-	/**
-	 * 
-	 */
 	private String mvId;
-
-	/**
-	 * 
-	 */
 	private String mvTtl;
-
-	/**
-	 * 
-	 */
 	private String engTtl;
-
-	/**
-	 * 
-	 */
 	private String scrnStt;
-
-	/**
-	 * 
-	 */
 	private int scrnTm;
-
-	/**
-	 * 
-	 */
 	private String opngDt;
-
-	/**
-	 * 
-	 */
 	private String grd;
-
-	/**
-	 * 
-	 */
 	private String pstr;
-
-	/**
-	 * 
-	 */
 	private String smr;
-
-	/**
-	 * 
-	 */
 	private String crtDt;
-
-	/**
-	 * 
-	 */
 	private String crtr;
-
-	/**
-	 * 
-	 */
 	private String mdfyDt;
-
-	/**
-	 * 
-	 */
 	private String mdfyr;
-
-	/**
-	 * 
-	 */
 	private String useYn;
-
-	/**
-	 * 
-	 */
 	private String delYn;
+	
+	private MbrVO crtMbrVO;
+	private MbrVO mdfyrMbrVO;
+	private List<MvGnrVO> gnrList;
+	private List<PrdcPrtcptnPplVO> pplList;
+	
+	
+	public List<MvGnrVO> getGnrList() {
+		return gnrList;
+	}
 
+	public void setGnrList(List<MvGnrVO> gnrList) {
+		this.gnrList = gnrList;
+	}
+
+	public List<PrdcPrtcptnPplVO> getPplList() {
+		return pplList;
+	}
+
+	public void setPplList(List<PrdcPrtcptnPplVO> pplList) {
+		this.pplList = pplList;
+	}
+
+	public MbrVO getCrtMbrVO() {
+		return crtMbrVO;
+	}
+
+	public void setCrtMbrVO(MbrVO crtMbrVO) {
+		this.crtMbrVO = crtMbrVO;
+	}
+
+	public MbrVO getMdfyrMbrVO() {
+		return mdfyrMbrVO;
+	}
+
+	public void setMdfyrMbrVO(MbrVO mdfyrMbrVO) {
+		this.mdfyrMbrVO = mdfyrMbrVO;
+	}
 
 	public void setMvId(String mvId) {
 		this.mvId = mvId;

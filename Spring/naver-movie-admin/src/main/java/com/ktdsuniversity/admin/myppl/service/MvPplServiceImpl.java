@@ -1,10 +1,17 @@
 package com.ktdsuniversity.admin.myppl.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ktdsuniversity.admin.common.api.exceptions.ApiException;
 import com.ktdsuniversity.admin.myppl.dao.MvPplDAO;
@@ -12,6 +19,11 @@ import com.ktdsuniversity.admin.myppl.vo.MvPplVO;
 
 @Service
 public class MvPplServiceImpl implements MvPplService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(MvPplServiceImpl.class);
+	
+	@Value("${upload.profile.path=:/naver-movie-admin/files/profiles}")
+	private String profilePath;
 	
 	@Autowired
 	private MvPplDAO mvPplDAO;
@@ -58,13 +70,87 @@ public class MvPplServiceImpl implements MvPplService {
 	}
 
 	@Override
-	public boolean createOneMvPpl(MvPplVO mvPplVO) {
+	public boolean createOneMvPpl(MvPplVO mvPplVO, MultipartFile uploadFile) {
+		if (uploadFile != null && !uploadFile.isEmpty()) {
+			File dir = new File(profilePath);
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+			String uuidFileName = UUID.randomUUID().toString();
+			File profileFile = new File(dir, uuidFileName);
+			
+			try {
+				uploadFile.transferTo(profileFile);
+			} catch (IllegalStateException | IOException e) {
+				logger.error(e.getMessage(), e);
+			}
+			
+			mvPplVO.setPrflPht(uuidFileName);
+		}
 		return mvPplDAO.createOneMvPpl(mvPplVO) > 0;
 	}
 
 	@Override
-	public boolean updateOneMvPpl(MvPplVO mvPplVO) {
-		return mvPplDAO.updateOneMvPpl(mvPplVO) > 0;
+	public boolean updateOneMvPpl(MvPplVO mvPplVO, MultipartFile uploadFile) {
+		if (uploadFile != null && !uploadFile.isEmpty()) {
+			File dir = new File(profilePath);
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+			String uuidFileName = UUID.randomUUID().toString();
+			File profileFile = new File(dir, uuidFileName);
+			
+			try {
+				uploadFile.transferTo(profileFile);
+			} catch (IllegalStateException | IOException e) {
+				logger.error(e.getMessage(), e);
+			}
+			
+			mvPplVO.setPrflPht(uuidFileName);
+		}
+		
+		boolean isModify = false;
+		MvPplVO originalMvPplData = mvPplDAO.readOneMvPplVOByMvPplId(mvPplVO.getMvPplId());
+		
+		MvPplVO updateMvPplVO = new MvPplVO();
+		updateMvPplVO.setMdfyr(mvPplVO.getMdfyr());
+		updateMvPplVO.setMvPplId(mvPplVO.getMvPplId());
+		updateMvPplVO.setRlNm(mvPplVO.getRlNm());
+		
+		if ((mvPplVO.getPrflPht() == null || mvPplVO.getPrflPht().length() == 0) && mvPplVO.getIsDeletePctr().equals("N")) {
+			updateMvPplVO.setPrflPht(originalMvPplData.getPrflPht());
+		}
+		else {
+			isModify = true;
+			updateMvPplVO.setPrflPht(mvPplVO.getPrflPht());
+		}
+		
+		if (!originalMvPplData.getNm().equals(mvPplVO.getNm())) {
+			isModify = true;
+			updateMvPplVO.setNm(mvPplVO.getNm());
+		}
+		
+		String rlNm = originalMvPplData.getRlNm();
+		if (rlNm == null) {
+			rlNm = "";
+		}
+		if (!rlNm.equals(mvPplVO.getRlNm())) {
+			isModify = true;
+		}
+		
+		String requestUseYn = mvPplVO.getUseYn() == null || mvPplVO.getUseYn().length() == 0 ? "N" : mvPplVO.getUseYn();
+		
+		if(!originalMvPplData.getUseYn().equals(requestUseYn)) {
+			isModify = true;
+			updateMvPplVO.setUseYn(mvPplVO.getUseYn());
+		}
+		
+		if (isModify) {
+			return mvPplDAO.updateOneMvPpl(updateMvPplVO) > 0;			
+		}
+		else {
+			throw new ApiException("400", "변경된 정보가 없습니다.");
+		}
 	}
 
 	@Override

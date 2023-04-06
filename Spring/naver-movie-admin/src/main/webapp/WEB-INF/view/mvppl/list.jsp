@@ -14,18 +14,23 @@
 <script type="text/javascript">
 	$().ready(function() {
 		
+		var ajaxUtil = new AjaxUtil();
+		
 		$(".grid > table > tbody > tr").click(function() {
 			$("#isModify").val("true"); // 수정모드
 			var data = $(this).data();
 			$("#mvPplId").val(data.mvpplid);
+			/* $("#prflPht").val(data.prflpht); */
 			$("#nm").val(data.nm);
 			$("#rlNm").val(data.rlnm);
 			$("#crtDt").val(data.crtdt);
-			$("#crtr").val(data.crtr);
+			$("#crtr").val(data.crtr + "(" + data.crtrnm + ")");
 			$("#mdfyDt").val(data.mdfydt);
-			$("#mdfyr").val(data.mdfyr);
+			$("#mdfyr").val(data.mdfyr + "(" + data.mdfyrnm + ")");
 			
+			$("#previewPrfl").attr("src", "${context}/mvppl/prfl/" + data.prflpht + "/");
 			$("#useYn").prop("checked", data.useyn == "Y");
+			console.log(data);
 		});
 		
 		$("#new-btn").click(function() {
@@ -39,51 +44,32 @@
 			$("#mdfyDt").val("");
 			$("#mdfyr").val("");
 			
+			$("#previewPrfl").attr("src", "${context}/img/baseProfile.png");
 			$("#useYn").prop("checked", false);
 		});
 		
 		$("#save-btn").click(function() {
-			
-			var fm = new FormData();
-			fm.append("uploadFile", $('#prflPht')[0].files[0])
-			fm.append("nm", $('#nm').val());
-			fm.append("rlNm", $('#rlNm').val());
-			fm.append("useYn", $('#useYn:checked').val() || "N");
-			
-			$.ajax({
-				type: "POST",
-				url: "${context}/api/mvppl/create",
-				processData: false,
-				contentType: false,
-				data: fm,
-				success: function(response) {
-					console.log(response)
-				}
-			});
-			
-			return 
-			
 			if ($("#isModify").val() == "false") {
 				// 신규등록
-				$.post("${context}/api/mvppl/create", {nm: $("#nm").val(), useYn: $("#useYn:checked").val()}, function(response) {
+				ajaxUtil.upload("#detail-form", "${context}/api/mvppl/create", function(response) {
 					if (response.status == "200 OK") {
 						location.reload(); // 새로고침
 					}
 					else {
 						alert(response.errorCode + "/" + response.message);
 					}
-				});
+				}, {"prflPht": "uploadFile"});
 			}
 			else {
 				// 수정
-				$.post("${context}/api/mvppl/update", {mvPplId: $("#mvPplId").val(), nm: $("#nm").val(), useYn: $("#useYn:checked").val()}, function(response) {
+				ajaxUtil.upload("#detail-form", "${context}/api/mvppl/update", function(response) {
 					if (response.status == "200 OK") {
 						location.reload(); // 새로고침
 					}
 					else {
 						alert(response.errorCode + "/" + response.message);
 					}
-				});				
+				}, {"prflPht": "uploadFile"});			
 			}
 		});
 		
@@ -98,7 +84,7 @@
 				return;
 			}
 			
-			$.get("${context}/api/mvPpl/delete/" + mvPplId, function(response) {
+			$.get("${context}/api/mvppl/delete/" + mvPplId, function(response) {
 				if (response.status == "200 OK") {
 					location.reload(); // 새로고침
 				}
@@ -109,7 +95,7 @@
 		});
 		
 		$("#search-btn").click(function() {
-			mavePage(0);
+			movePage(0);
 		});
 		
 		$("#all_check").change(function() {
@@ -125,7 +111,7 @@
 		$("#delete-all-btn").click(function() {
 			var checkLen = $(".check-idx:checked").length;
 			if (checkLen == 0) {
-				alert("삭제할 장르가 없습니다");
+				alert("삭제할 영화인이 없습니다");
 				return;
 			}
 			
@@ -139,14 +125,66 @@
 			
 		});
 		
+		$("#previewPrfl").click(function () {
+			$("#prflPht").click();
+		});
+		
+		$("#prflPht").change(function() {
+			// 선택한 파일 정보
+			var file = $(this)[0].files;
+			console.log(file.length)
+			
+			if (file.length > 0) {
+				var fileReader = new FileReader();
+				fileReader.onload = function(data) {
+					//FileReader 객체 로드가 완료되었을 경우
+					console.log(data);
+					$("#previewPrfl").attr("src", data.target.result);
+				}
+				
+				fileReader.readAsDataURL(file[0]);
+			}
+			else {
+				// 파일이 없으면 기본 이미지로 변경
+				$("#prflPht").val("");
+				$("#previewPrfl").attr("src", "${context}/img/baseProfile.png");
+				$("#isDeletePctr").val("Y");
+			}
+		});
+		
+		$("#del_pctr").click(function(event) {
+			event.preventDefault();
+			$("#prflPht").val("");
+			$("#previewPrfl").attr("src", "${context}/img/baseProfile.png");
+			$("#isDeletePctr").val("Y");
+		})
+		
 	});
+	
 	
 		function movePage(pageNo) {
 			// 전송
 			// 입력 값
 			var nm = $("#search-keyword-nm").val();
+			var rlNm = $("#search-keyword-rlnm").val();
+			var startDt = $("#search-keyword-startdt").val();
+			var endDt = $("#search-keyword-enddt").val();
+			
+			var intStartDt = parseInt(startDt.split("-").join(""));
+			var intEndDt = parseInt(endDt.split("-").join(""));
+			
+			if (intStartDt > intEndDt) {
+				alert("시작일자를 확인해주세요");
+				return;
+			}
+			
+			var queryString = "nm=" + nm;
+			queryString += "&rlNm=" + rlNm;
+			queryString += "&startDt=" + startDt;
+			queryString += "&endDt=" + endDt;
+			queryString += "&pageNo=" + pageNo;
 			// URL 요청
-			location.href = "${context}/mvppl/list?nm=" + nm + "&pageNo=" + pageNo;
+			location.href = "${context}/mvppl/list?" + queryString;
 		}
 
 </script>
@@ -161,17 +199,17 @@
 				<div class="search-row-group">
 					<div class="search-group">
 						<label for="search-keyword-nm">이름</label>
-						<input type="text" id="search-keyword-nm" class="search-input" value="${mvPplVO.nm}" />
+						<input type="text" id="search-keyword-nm" class="search-input" value="${nm}" />
 						<label for="search-keyword-rlnm">본명</label>
-						<input type="text" id="search-keyword-rlnm" class="search-input" value="${mvPplVO.rlNm}" />
+						<input type="text" id="search-keyword-rlnm" class="search-input" value="${rlNm}" />
 					</div>
 						
-						<div class="search-group">
-							<label for="search-keyword-startdt">조회기간</label>
-							<input type="date" id="search-keyword-startdt" class="search-input" value="${mvPplVO.startDt}" />
-							<input type="date" id="search-keyword-enddt" class="search-input" value="${mvPplVO.endDt}" />
-							<button class="btn-search" id="search-btn">&#128269</button>					
-						</div>
+					<div class="search-group">
+						<label for="search-keyword-startdt">조회기간</label>
+						<input type="date" id="search-keyword-startdt" class="search-input" value="${mvPplVO.startDt}" />
+						<input type="date" id="search-keyword-enddt" class="search-input" value="${mvPplVO.endDt}" />
+						<button class="btn-search" id="search-btn">&#128269</button>					
+					</div>
 				</div>
 				<div class="grid">
 					<div class="grid-count align-right">
@@ -205,8 +243,8 @@
 												data-mdfydt="${mvPpl.mdfyDt}"
 												data-mdfyr="${mvPpl.mdfyr}"
 												data-useyn="${mvPpl.useYn}"
-												data-delyn="${mvPpl.crtrMbrVO.mbrNm}"
-												data-delyn="${mvPpl.mdfyMbrVO.mbrNm}" >
+												data-crtrnm="${mvPpl.crtrMbrVO.mbrNm}"
+												data-mdfyrnm="${mvPpl.mdfyMbrVO.mbrNm}" >
 												<td>
 													<input type="checkbox" class="check-idx" value="${mvPpl.mvPplId}" />
 												</td>
@@ -269,11 +307,17 @@
 						isModify == false ==> 등록(insert)
 						-->
 						<input type="hidden" id="isModify" value="false" />
+						<div class="input-group inline">
+							<div style="position: relative;">
+								<input type="file" id="prflPht" name="prflPht" value=""/>
+								<img src="${context}/img/baseProfile.png" id="previewPrfl" class="profile"/>
+								<button id="del_pctr" style="position: absolute; right: 10px; bottom: 10px;">X</button>
+								<input type="hidden" id="isDeletePctr" name="isDeletePctr" value="N" />
+							</div>
+						</div>
+						<div></div>
 						<div class="input-group inline"> 
 							<label for="mvPplId" style="width: 180px;">영화인ID</label><input type="text" id="mvPplId" name="mvPplId" readonly value=""/>
-						</div>
-						<div class="input-group inline">
-							<label for="prflPht" style="width: 180px;">프로필사진</label><input type="file" id="prflPht" name="prflPht" value=""/>
 						</div>
 						<div class="input-group inline">
 							<label for="nm" style="width: 180px;">이름</label><input type="text" id="nm" name="nm" value=""/>

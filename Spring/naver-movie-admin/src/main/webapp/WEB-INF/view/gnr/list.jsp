@@ -88,7 +88,7 @@
 		});
 		
 		$("#search-btn").click(function() {
-			mavePage(0);
+			movePage(0);
 		});
 		
 		$("#all_check").change(function() {
@@ -140,9 +140,7 @@
 				<div class="search-group">
 					<label for="search-keyword">장르명</label>
 					<input type="text" id="search-keyword" class="search-input" value="${gnrNm}" />
-					<div>
-						<button class="btn-search" id="search-btn">&#128269</button>					
-					</div>
+						<button class="search-btn" id="search-btn">&#128269</button>					
 				</div>
 				<div class="grid">
 					<div class="grid-count align-right">

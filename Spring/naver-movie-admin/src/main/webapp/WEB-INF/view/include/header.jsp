@@ -8,5 +8,5 @@
 		<li class="nav-item"><a href="${context}/gnr/list">영화 관리</a></li>
 		<li class="nav-item"><a href="${context}/mbr/list">시스템 관리</a></li>
 	</ul>
-	<div class="inline profile">이름<a href="${context}/mbr/logout">(Logout)</a></div>
+	<div class="inline profile">${sessionScope.__ADMIN__.mbrNm}<a href="${context}/mbr/logout">(Logout)</a></div>
 </div>

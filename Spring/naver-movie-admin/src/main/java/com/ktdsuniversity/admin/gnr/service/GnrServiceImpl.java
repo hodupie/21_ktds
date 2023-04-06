@@ -19,7 +19,12 @@ public class GnrServiceImpl implements GnrService {
 	public List<GnrVO> readAllGnrVO(GnrVO gnrVO) {
 		return gnrDAO.readAllGnrVO(gnrVO);
 	}
-
+	
+	@Override
+	public List<GnrVO> readAllGnrVONoPagination(String gnrNm) {
+		return gnrDAO.readAllGnrVONoPagination(gnrNm);
+	}
+	
 	@Override
 	public boolean createOneGnr(GnrVO gnrVO) {
 		return gnrDAO.createOneGnr(gnrVO) > 0;
